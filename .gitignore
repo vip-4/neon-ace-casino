@@ -1,0 +1,25 @@
+# Generated output is intentionally not ignored: dist/ is the deployable
+# artifact for static hosts that do not run a build step.
+
+# Derived deployment variants (rebuildable with the scripts in scripts/).
+dist-tg/
+dist-github/
+dist-firebase/
+
+# Flutter generated output (keep sources and pubspec.lock).
+flutter_app/build/
+flutter_app/.dart_tool/
+flutter_app/.flutter-plugins
+flutter_app/.flutter-plugins-dependencies
+flutter_app/.packages
+
+# OS and editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+
+# Logs and local previews
+*.log
+preview/

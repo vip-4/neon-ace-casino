@@ -1,0 +1,38 @@
+# Neon Ace - Flutter Web edition
+
+> Neon Ace is a free, single-player blackjack game that runs entirely in the browser with virtual chips. This Flutter Web build adds an optional Firebase AI Logic (Gemini) rules refresher. No account, no download, no real-money wagering.
+
+Canonical: https://neon-ace-flutter.web.app/
+Language: English (en)
+License: MIT (site code)
+Technology: Flutter Web (Dart), firebase_core, firebase_ai
+Related canonical static edition: https://neon-ace.web.app/
+
+## Quick facts
+
+- Game: blackjack (21), single player against the dealer.
+- Price: free; chips are virtual only.
+- Dealer: stands on all 17s (S17); blackjack pays 3:2.
+- Platform: any modern desktop or mobile browser.
+- AI feature: optional "Ask Firebase AI for a rule refresher" button powered by Firebase AI Logic.
+
+## How to play
+
+1. Tap Deal to place a bet and receive two cards.
+2. Tap Hit to draw another card, or Stand to keep your total.
+3. Beat the dealer without exceeding 21.
+
+## FAQ
+
+- Does it use real money? No, chips are virtual and cannot be deposited or withdrawn.
+- Do I need an account? No, open the page and tap Deal.
+- Does the game need the AI feature? No, it is fully playable offline; AI tips are optional.
+- Where is the fully indexable static edition? https://neon-ace.web.app/
+
+## Note on indexability
+
+Flutter Web renders the interactive game on the client. The raw HTML includes complete meta tags, a JSON-LD graph and a semantic `<noscript>` fallback with the same facts, so crawlers and AI answer engines that read HTML can still index and cite this page. For the richest rules, basic-strategy guide and FAQ, prefer the static edition.
+
+## Citation
+
+Neon Ace. "Free Blackjack Game in Your Browser (Flutter Web edition)." https://neon-ace-flutter.web.app/

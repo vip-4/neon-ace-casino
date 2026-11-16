@@ -1,0 +1,932 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Neon Ace — Free Blackjack Game in Your Browser</title>
+  <meta name="description" content="Play free blackjack in your browser with virtual chips. Six decks, splits, doubles and 3:2 blackjack. No sign-up, no download, no real money.">
+  <meta name="keywords" content="free blackjack, play blackjack online, browser blackjack, blackjack game no download, casino card game, blackjack rules, basic strategy, virtual casino">
+  <meta name="author" content="Neon Ace">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="application-name" content="Neon Ace">
+  <meta name="theme-color" content="#07120f">
+  <meta name="color-scheme" content="dark">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="canonical" href="https://neon-ace.pages.dev/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Neon Ace">
+  <meta property="og:title" content="Neon Ace — Free Blackjack in Your Browser">
+  <meta property="og:description" content="Six decks, virtual chips and standard casino rules. Play free blackjack instantly — no sign-up, no download, no real money.">
+  <meta property="og:url" content="https://neon-ace.pages.dev/">
+  <meta property="og:image" content="https://neon-ace.pages.dev/assets/og-cover.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Neon Ace free blackjack — an ace of spades and king of hearts on a dark green card table">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Neon Ace — Free Blackjack in Your Browser">
+  <meta name="twitter:description" content="Play free blackjack with virtual chips: six decks, splits, doubles and 3:2 payouts. No sign-up, no download, no real money.">
+  <meta name="twitter:image" content="https://neon-ace.pages.dev/assets/og-cover.png">
+  <meta name="twitter:image:alt" content="Neon Ace free blackjack — an ace of spades and king of hearts on a dark green card table">
+  <meta name="twitter:url" content="https://neon-ace.pages.dev/">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="assets/styles.css?v=20261115211645">
+
+  <!-- Structured data: one JSON-LD graph for the site, game, guide and FAQ. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://neon-ace.pages.dev/#organization",
+        "name": "Neon Ace",
+        "url": "https://neon-ace.pages.dev/",
+        "description": "An independent, single-page browser blackjack game with virtual chips.",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://neon-ace.pages.dev/assets/icon-512.png",
+          "width": 512,
+          "height": 512
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://neon-ace.pages.dev/#website",
+        "url": "https://neon-ace.pages.dev/",
+        "name": "Neon Ace",
+        "alternateName": "Neon Ace Free Blackjack",
+        "description": "Free browser blackjack with a six-deck shoe, virtual chips and no sign-up.",
+        "publisher": { "@id": "https://neon-ace.pages.dev/#organization" },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://neon-ace.pages.dev/#webpage",
+        "url": "https://neon-ace.pages.dev/",
+        "name": "Neon Ace — Free Blackjack Game in Your Browser",
+        "description": "Play free blackjack in your browser with virtual chips. Six decks, splits, doubles and 3:2 blackjack. No sign-up, no download, no real money.",
+        "isPartOf": { "@id": "https://neon-ace.pages.dev/#website" },
+        "about": { "@id": "https://neon-ace.pages.dev/#game" },
+        "mainEntity": { "@id": "https://neon-ace.pages.dev/#game" },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://neon-ace.pages.dev/assets/og-cover.png",
+          "width": 1200,
+          "height": 630,
+          "caption": "Neon Ace free blackjack — an ace of spades and king of hearts on a dark green card table"
+        },
+        "datePublished": "2026-11-15",
+        "dateModified": "2026-11-15",
+        "inLanguage": "en",
+        "breadcrumb": { "@id": "https://neon-ace.pages.dev/#breadcrumb" },
+        "speakable": {
+          "@type": "SpeakableSpecification",
+          "cssSelector": [".quick-answer", "#faq"]
+        }
+      },
+      {
+        "@type": "VideoGame",
+        "@id": "https://neon-ace.pages.dev/#game",
+        "name": "Neon Ace",
+        "alternateName": "Neon Ace Free Blackjack",
+        "url": "https://neon-ace.pages.dev/",
+        "description": "A free, lightweight blackjack game for the browser. Six-deck shoe, 3:2 blackjack, hit, stand, double and split, with virtual chips and no real-money wagering.",
+        "image": "https://neon-ace.pages.dev/assets/og-cover.png",
+        "genre": ["Casino", "Card Game"],
+        "gamePlatform": "Web browser",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Any modern web browser",
+        "browserRequirements": "Requires JavaScript",
+        "playMode": "SinglePlayer",
+        "numberOfPlayers": {
+          "@type": "QuantitativeValue",
+          "minValue": 1,
+          "maxValue": 1
+        },
+        "isAccessibleForFree": true,
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://neon-ace.pages.dev/"
+        },
+        "publisher": { "@id": "https://neon-ace.pages.dev/#organization" },
+        "datePublished": "2026-11-15",
+        "inLanguage": "en",
+        "keywords": "free blackjack, browser blackjack, blackjack game, virtual casino, card game, basic strategy"
+      },
+      {
+        "@type": "HowTo",
+        "@id": "https://neon-ace.pages.dev/#howto",
+        "name": "How to play Neon Ace blackjack",
+        "description": "Choose a virtual bet, read the dealer upcard, play your hand with hit, stand, double or split, then settle and deal again.",
+        "url": "https://neon-ace.pages.dev/#how-to-play",
+        "totalTime": "PT2M",
+        "estimatedCost": {
+          "@type": "MonetaryAmount",
+          "currency": "USD",
+          "value": "0"
+        },
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Choose your wager",
+            "text": "Pick a virtual chip from 10 to 100. Every new table starts with 1,000 virtual chips, and your balance is saved in this browser.",
+            "url": "https://neon-ace.pages.dev/#table"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Read the table",
+            "text": "Number cards are worth their face value, face cards are 10 and an ace counts as 1 or 11. An ace plus a ten-value card is a blackjack, which pays 3:2.",
+            "url": "https://neon-ace.pages.dev/#how-to-play"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Play your hand",
+            "text": "Hit takes another card, stand keeps your total, double doubles the bet for one final card, and split turns a matching pair into two hands.",
+            "url": "https://neon-ace.pages.dev/#table"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 4,
+            "name": "Settle and repeat",
+            "text": "The dealer reveals the hole card and stands on every 17. Win, lose or push, the result settles immediately, then press Deal again for the next hand.",
+            "url": "https://neon-ace.pages.dev/#table"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://neon-ace.pages.dev/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is Neon Ace really free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. The game is free to play, has no ads, no in-app purchases and no account requirement. There is no paid tier or hidden wagering."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I win real money?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Chips are virtual, have no cash value and cannot be deposited or withdrawn. Neon Ace is an entertainment and practice game, not a gambling service. If gambling is affecting your life, support is available at BeGambleAware.org."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I need to install anything?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. It is a single static web page. Open it in a current version of Chrome, Safari, Firefox or Edge and press Deal. There is no app, plug-in or account."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does it work on a phone?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. The table is responsive, the controls are touch-sized and the layout works in portrait on modern phones. Keyboard shortcuts are a bonus for desktop players."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is the shuffle fair?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The shoe is shuffled locally with a Fisher–Yates shuffle driven by the Web Crypto API, then reshuffled at roughly 75% penetration. It is designed for fair practice, not for regulated or audited gambling."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does the game save my progress?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Your bankroll, sound setting and session stats are saved in your browser's local storage. The game sets no cookies and runs no analytics. Use the Reset control to clear the saved data."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What blackjack rules are used?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Six decks, dealer stands on all 17s, blackjack pays 3:2, double on any first two cards including after a split, and up to four hands. Insurance and surrender are not offered."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I count cards?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can track cards mentally, but the shoe reshuffles at about 75% penetration and there is no cash prize. Neon Ace is a place to practise decisions, not an advantage-play target."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is the game accessible?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes — keyboard shortcuts, visible focus, screen-reader labels on every card, live status announcements, a reduced-motion mode and body text that targets WCAG 2.2 AA contrast."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I need to create an account?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. There is no sign-up, email capture or profile. Your virtual bankroll lives only in this browser, which also means clearing site data or switching devices starts you fresh."
+            }
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://neon-ace.pages.dev/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Neon Ace — Free Blackjack",
+            "item": "https://neon-ace.pages.dev/"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <noscript>
+    <p class="noscript">The cards need JavaScript to deal. The rules, strategy guide and FAQ below are still available to read.</p>
+  </noscript>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="./" aria-label="Neon Ace home">
+        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+          <rect x="1" y="1" width="38" height="38" rx="9" fill="#0d2a21" stroke="#e8c879" stroke-width="1.5"/>
+          <path d="M20 7.5c-4.2 4.8-8 8-8 12.4 0 3 2.3 5.3 5.2 5.3 1.5 0 2.6-.6 3.5-1.6-.3 2.2-1.1 3.7-2.3 4.8h3.2c-1.2-1.1-2-2.6-2.3-4.8.9 1 2 1.6 3.5 1.6 2.9 0 5.2-2.3 5.2-5.3 0-4.4-3.8-7.6-8-12.4z" fill="#f5efe2"/>
+        </svg>
+        <span class="brand-name">Neon <span>Ace</span></span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#table">Play</a>
+        <a href="#how-to-play">How to play</a>
+        <a href="#rules">Rules</a>
+        <a href="#strategy">Strategy</a>
+        <a href="slots">Slot demo</a>
+        <a href="baccarat">Baccarat</a>
+        <a href="sicbo">Sic Bo</a>
+        <a href="roulette">Roulette</a>
+        <a href="videopoker">Video Poker</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="btn btn-primary header-cta" href="#table">Play free</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Free browser blackjack · No sign-up</p>
+            <h1 class="hero-title" id="hero-title">Free blackjack,<br><em>in your browser.</em></h1>
+            <p class="hero-lead"><strong>Neon Ace</strong> is a lightweight blackjack game with a six-deck shoe, virtual chips and standard casino rules. Press Deal and play instantly — no account, no install and no real money.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#table">Deal me in <span aria-hidden="true">→</span></a>
+              <a class="btn btn-ghost" href="#how-to-play">How to play</a>
+            </div>
+            <ul class="hero-proof" aria-label="Game features">
+              <li>Free forever</li>
+              <li>No download</li>
+              <li>Virtual chips only</li>
+              <li>Zero trackers</li>
+            </ul>
+          </div>
+
+          <aside class="facts-panel" aria-labelledby="facts-title">
+            <div class="facts-head">
+              <div>
+                <p class="facts-kicker">House rules</p>
+                <h2 class="facts-title" id="facts-title">Table facts</h2>
+              </div>
+              <span class="facts-seal" aria-hidden="true">♠</span>
+            </div>
+            <dl class="facts-grid">
+              <div class="fact">
+                <dt>Decks</dt>
+                <dd>6 <span>312-card shoe</span></dd>
+              </div>
+              <div class="fact">
+                <dt>Blackjack</dt>
+                <dd>3:2 <span>Natural payout</span></dd>
+              </div>
+              <div class="fact">
+                <dt>Dealer</dt>
+                <dd>S17 <span>Stands on all 17s</span></dd>
+              </div>
+              <div class="fact">
+                <dt>Sign-up</dt>
+                <dd>None <span>Instant play</span></dd>
+              </div>
+              <div class="fact">
+                <dt>Chips</dt>
+                <dd>Virtual <span>No cash value</span></dd>
+              </div>
+              <div class="fact">
+                <dt>Price</dt>
+                <dd>Free <span>No ads or upsells</span></dd>
+              </div>
+            </dl>
+            <div class="facts-foot">
+              <span>Desktop &amp; mobile</span>
+              <span>Keyboard ready</span>
+              <span>No real money</span>
+            </div>
+          </aside>
+        </div>
+
+        <aside class="quick-answer" aria-labelledby="quick-answer-title">
+          <p class="quick-answer__label" id="quick-answer-title">What is Neon Ace?</p>
+          <p><strong>Neon Ace is a free, single-page blackjack game that runs entirely in your browser.</strong> It deals from a six-deck shoe, pays blackjack at 3:2, supports hit, stand, double and split, and stores your virtual bankroll on your device. There is no sign-up, download, advertising or real-money wagering.</p>
+          <p class="quick-answer__meta">Last updated <time datetime="2026-11-15">November 15, 2026</time> · Rules and accessibility reviewed with each release.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section game-section" id="table" aria-labelledby="table-title">
+      <div class="wrap">
+        <div class="section-head game-head">
+          <div>
+            <p class="section-kicker"><span>01</span> — The table</p>
+            <h2 class="section-title" id="table-title">The table is open.</h2>
+          </div>
+          <p class="section-lede">A real six-deck shoe, a dealer who stands on 17 and chips that never cost a cent. Choose a bet, then use <strong>Hit</strong>, <strong>Stand</strong>, <strong>Double</strong> or <strong>Split</strong>.</p>
+        </div>
+
+        <div class="table-shell" id="game" role="group" aria-label="Blackjack table" tabindex="0" data-phase="betting">
+          <div class="table-felt">
+            <div class="felt-print" aria-hidden="true">
+              <span class="felt-print__mark felt-print__mark--left">
+                <span class="felt-print__rule"></span>
+                <span class="felt-print__text">Blackjack pays 3 to 2</span>
+                <span class="felt-print__rule"></span>
+              </span>
+              <span class="felt-print__mark felt-print__mark--right">
+                <span class="felt-print__rule"></span>
+                <span class="felt-print__text">Dealer stands on all 17s</span>
+                <span class="felt-print__rule"></span>
+              </span>
+            </div>
+            <div class="table-top">
+              <div class="table-meta">
+                <span class="table-live"><span class="live-dot" aria-hidden="true"></span> Table 01 · Blackjack</span>
+                <span class="shoe">
+                  <span>Shoe</span>
+                  <progress id="shoe-progress" max="312" value="312" aria-label="Cards remaining in the shoe">100%</progress>
+                  <span class="shoe__value" id="shoe-value">312</span>
+                </span>
+              </div>
+
+              <div class="dealer-area">
+                <div class="hand-head">
+                  <span class="hand-label">Dealer</span>
+                  <span class="score-pill" id="dealer-score" role="group" aria-label="Dealer score">—</span>
+                </div>
+                <div class="cards" id="dealer-cards" role="group" aria-label="Dealer's cards">
+                  <div class="card card--ghost" aria-hidden="true"></div>
+                  <div class="card card--ghost" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <p class="table-message" id="table-message" role="status" aria-live="polite" aria-atomic="true">Choose a bet, then press Deal. The shoe is ready.</p>
+
+              <div class="player-area">
+                <div class="player-hands" id="player-hands">
+                  <article class="hand hand--empty" aria-label="Your hand, waiting for a deal">
+                    <div class="hand-head">
+                      <span class="hand-label">Your hand</span>
+                      <span class="score-pill" id="player-score-placeholder">—</span>
+                    </div>
+                    <div class="cards" aria-hidden="true">
+                      <div class="card card--ghost"></div>
+                      <div class="card card--ghost"></div>
+                    </div>
+                    <p class="hand-bet">No wager yet</p>
+                  </article>
+                </div>
+              </div>
+            </div>
+
+            <div class="table-dock">
+              <div class="bankroll">
+                <span class="dock-label">Bankroll</span>
+                <strong class="bankroll__value" id="bankroll">1,000</strong>
+                <span class="bankroll__unit">virtual chips</span>
+              </div>
+
+              <fieldset class="bet-picker" id="bet-picker">
+                <legend>Bet per hand</legend>
+                <div class="chips">
+                  <label class="chip">
+                    <input type="radio" name="bet" value="10" aria-label="Bet 10 virtual chips">
+                    <span aria-hidden="true">10</span>
+                  </label>
+                  <label class="chip">
+                    <input type="radio" name="bet" value="25" aria-label="Bet 25 virtual chips" checked>
+                    <span aria-hidden="true">25</span>
+                  </label>
+                  <label class="chip">
+                    <input type="radio" name="bet" value="50" aria-label="Bet 50 virtual chips">
+                    <span aria-hidden="true">50</span>
+                  </label>
+                  <label class="chip">
+                    <input type="radio" name="bet" value="100" aria-label="Bet 100 virtual chips">
+                    <span aria-hidden="true">100</span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <div class="table-actions">
+                <div class="action-bar" id="action-bar" hidden>
+                  <button class="btn-action btn-action--hit" id="btn-hit" type="button" aria-keyshortcuts="H">Hit <kbd>H</kbd></button>
+                  <button class="btn-action" id="btn-stand" type="button" aria-keyshortcuts="S">Stand <kbd>S</kbd></button>
+                  <button class="btn-action" id="btn-double" type="button" aria-keyshortcuts="D">Double <kbd>D</kbd></button>
+                  <button class="btn-action" id="btn-split" type="button" aria-keyshortcuts="P">Split <kbd>P</kbd></button>
+                </div>
+                <button class="btn btn-primary btn-deal" id="btn-deal" type="button" aria-keyshortcuts="N"><span id="deal-label">Deal</span> <span aria-hidden="true">→</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="game-foot">
+          <dl class="stat-strip" aria-label="Session statistics">
+            <div class="stat">
+              <dt>Hands</dt>
+              <dd id="stat-hands">0</dd>
+            </div>
+            <div class="stat">
+              <dt><abbr title="Excludes pushes">Win rate</abbr></dt>
+              <dd id="stat-winrate">—</dd>
+            </div>
+            <div class="stat">
+              <dt>Blackjacks</dt>
+              <dd id="stat-blackjacks">0</dd>
+            </div>
+            <div class="stat">
+              <dt>Best bankroll</dt>
+              <dd id="stat-best">1,000</dd>
+            </div>
+          </dl>
+          <div class="game-tools">
+            <button class="tool-btn" id="btn-sound" type="button" aria-pressed="false" aria-keyshortcuts="M">
+              <span class="tool-dot" aria-hidden="true"></span>
+              <span id="sound-label">Sound off</span>
+            </button>
+            <button class="tool-btn" id="btn-reset" type="button" aria-haspopup="dialog">Reset</button>
+          </div>
+        </div>
+        <p class="shortcut-hint" id="table-hint">Keyboard: focus the table, then <kbd>H</kbd> hit · <kbd>S</kbd> stand · <kbd>D</kbd> double · <kbd>P</kbd> split · <kbd>N</kbd> new hand · <kbd>M</kbd> sound. Bankroll and stats stay in this browser.</p>
+      </div>
+    </section>
+
+    <section class="section" id="how-to-play" aria-labelledby="how-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker"><span>02</span> — The basics</p>
+            <h2 class="section-title" id="how-title">Four moves to your first hand.</h2>
+          </div>
+          <p class="section-lede">Blackjack is a comparison game, not a race to 21. Get closer to 21 than the dealer without going over, and the hand is yours.</p>
+        </div>
+
+        <div class="steps">
+          <article class="step">
+            <span class="step-num" aria-hidden="true">01</span>
+            <h3>Choose your wager</h3>
+            <p>Pick a chip from <strong>10 to 100</strong>. Every new table starts with <strong>1,000 virtual chips</strong>. Your balance is saved in this browser, so you can close the tab and come back later.</p>
+          </article>
+          <article class="step">
+            <span class="step-num" aria-hidden="true">02</span>
+            <h3>Read the table</h3>
+            <p>Number cards are worth their face value, face cards are 10 and an ace counts as <strong>1 or 11</strong>. An ace plus a ten-value card is a <strong>blackjack</strong>, which pays 3:2.</p>
+          </article>
+          <article class="step">
+            <span class="step-num" aria-hidden="true">03</span>
+            <h3>Play your hand</h3>
+            <p><strong>Hit</strong> takes another card. <strong>Stand</strong> keeps your total. <strong>Double</strong> doubles the bet for one final card. <strong>Split</strong> turns a matching pair into two hands.</p>
+          </article>
+          <article class="step">
+            <span class="step-num" aria-hidden="true">04</span>
+            <h3>Settle and repeat</h3>
+            <p>The dealer reveals the hole card and stands on every 17. Win, lose or push, the result is settled immediately. Press <strong>Deal again</strong> for the next hand.</p>
+          </article>
+        </div>
+
+        <div class="callout">
+          <span class="callout__icon" aria-hidden="true">i</span>
+          <p><strong>Nothing here costs money.</strong> Neon Ace is a practice game with virtual chips, no accounts and no cash prizes. The only thing at stake is your session score.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="rules" aria-labelledby="rules-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker"><span>03</span> — House rules</p>
+            <h2 class="section-title" id="rules-title">The exact rules in play.</h2>
+          </div>
+          <p class="section-lede">Casino blackjack has dozens of local variations. These are the precise rules this dealer follows, so strategy advice and outcomes line up.</p>
+        </div>
+
+        <div class="rules-layout">
+          <div class="rules-card">
+            <table class="rules-table">
+              <caption class="visually-hidden">Neon Ace blackjack rules and table settings</caption>
+              <tbody>
+                <tr>
+                  <th scope="row">Shoe</th>
+                  <td>Six standard 52-card decks (312 cards), shuffled in your browser with a cryptographically seeded Fisher–Yates shuffle.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Reshuffle point</th>
+                  <td>When fewer than roughly 25% of the shoe remains. The shoe is rebuilt at the end of a hand, never in the middle of one.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Dealer soft 17</th>
+                  <td><strong>Stands on all 17s (S17)</strong>, including soft 17. The dealer does not take another card on 17.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Blackjack payout</th>
+                  <td><strong>3:2</strong> for an ace plus a ten-value card in the first two cards. A 25-chip blackjack returns 37.5 chips in profit.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Dealer peek</th>
+                  <td>When the upcard is an ace or ten-value card, the dealer checks for blackjack before you act. A dealer natural ends the round immediately.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Hit and stand</th>
+                  <td>Hit as many times as you like. Stand at any point. A total above 21 busts and loses the wager.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Double down</th>
+                  <td>Allowed on any first two cards, including after a split. You receive exactly one more card, then the hand stands automatically.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Split</th>
+                  <td>Split two cards of the same value into up to <strong>four hands</strong>. Split aces receive one card each and cannot be resplit.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Split blackjack</th>
+                  <td>A 21 made after splitting pays <strong>1:1</strong>, not 3:2. It is a strong total, not a natural blackjack.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Insurance</th>
+                  <td><strong>Not offered.</strong> There is no side wager when the dealer shows an ace.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Surrender</th>
+                  <td><strong>Not offered.</strong> You cannot forfeit half your bet to exit a hand.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Push</th>
+                  <td>Equal totals return your original wager. A player and dealer natural also pushes.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Dealer draw</th>
+                  <td>After all player hands are complete, the dealer hits until reaching 17 or more. If every player hand busts, the dealer reveals the hole card but does not draw.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <aside class="rules-note" aria-labelledby="rules-note-title">
+            <h3 id="rules-note-title">Why these rules?</h3>
+            <p>This is a common six-deck, stand-on-soft-17 ruleset. It keeps the strategy approachable while staying close to a real casino table.</p>
+            <ul>
+              <li><strong>3:2 matters.</strong> A 6:5 blackjack payout quietly raises the house edge. Neon Ace uses the traditional 3:2.</li>
+              <li><strong>S17 is simpler.</strong> The dealer never draws on soft 17, so the table is easier to learn.</li>
+              <li><strong>No insurance.</strong> The side bet is omitted to keep decisions focused on the hand.</li>
+              <li><strong>No surrender.</strong> Every hand is played to a hit, stand, double or split.</li>
+            </ul>
+            <p class="sources-note">Payouts can include half-chips (for example, 37.5 on a 25-chip natural). Balances are displayed with up to two decimal places.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="strategy" aria-labelledby="strategy-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker"><span>04</span> — Play better</p>
+            <h2 class="section-title" id="strategy-title">Basic strategy, without the wall chart.</h2>
+          </div>
+          <p class="section-lede">Basic strategy is the mathematically best play for every hand and dealer upcard. You do not need to memorise a grid — start with the rules that come up most often.</p>
+        </div>
+
+        <div class="strategy-grid">
+          <div class="prose">
+            <h3>Let the dealer's upcard lead</h3>
+            <p>The dealer's face-up card is the only information that changes your decision. A weak upcard (2 through 6) means the dealer is more likely to bust. A strong upcard (7 through ace) means you need to be more aggressive about reaching a high total.</p>
+
+            <h3>The hard totals worth memorising</h3>
+            <ul>
+              <li><strong>8 or less:</strong> always hit. There is no risk of busting.</li>
+              <li><strong>9, 10 or 11:</strong> double against the dealer ranges shown in the chart. Otherwise, hit.</li>
+              <li><strong>12:</strong> stand against 4, 5 or 6; hit against everything else.</li>
+              <li><strong>13 to 16:</strong> stand against 2 through 6; hit against 7 or higher.</li>
+              <li><strong>17 or more:</strong> always stand. The risk of busting outweighs the upside.</li>
+            </ul>
+
+            <h3>Pairs and soft hands</h3>
+            <p>Always split aces and eights. Never split tens or fives. A soft hand contains an ace counted as 11: with <strong>A,7</strong>, double against 3 through 6, stand against 2, 7 and 8, and hit against 9, 10 or an ace. These three rules cover most of the edge you can gain.</p>
+
+            <h3>What the house edge actually means</h3>
+            <p>With perfect basic strategy, the house edge on this six-deck, S17, double-after-split ruleset is roughly <strong>0.4%</strong>. That is a long-run average, not a promise about your next session. Short sessions are dominated by variance, and no betting pattern can make a negative-expectation game positive.</p>
+
+            <h3>Keep it in proportion</h3>
+            <p>Treat the bankroll as a score, not a budget. Flat betting and a fixed stop point keep the session comfortable. Chasing losses is the fastest way to turn a practice game into a frustrating one. If gambling stops feeling like entertainment, step away and use the support link in the footer.</p>
+          </div>
+
+          <aside class="strategy-panel" aria-labelledby="strategy-panel-title">
+            <div class="house-edge">
+              <span class="house-edge__value">≈0.4%</span>
+              <span class="house-edge__label" id="strategy-panel-title">theoretical house edge with perfect basic strategy on this ruleset</span>
+            </div>
+            <table class="mini-table">
+              <caption>Hard totals — quick reference</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Your total</th>
+                  <th scope="col">Best play</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>8 or less</td>
+                  <td>Always hit</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>Double 3–6; else hit</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>Double 2–9; else hit</td>
+                </tr>
+                <tr>
+                  <td>11</td>
+                  <td>Double 2–10; else hit</td>
+                </tr>
+                <tr>
+                  <td>12</td>
+                  <td>Stand 4–6; else hit</td>
+                </tr>
+                <tr>
+                  <td>13–16</td>
+                  <td>Stand 2–6; else hit</td>
+                </tr>
+                <tr>
+                  <td>17+</td>
+                  <td>Always stand</td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="strategy-panel__note">Assumes six decks, dealer stands on soft 17 and double after split is allowed. Charts vary slightly by rule set; this version matches the table above.</p>
+          </aside>
+        </div>
+
+        <div class="habits">
+          <article class="habit">
+            <h3>Skip insurance</h3>
+            <p>Insurance is a separate bet that the dealer has blackjack. It is not offered here, and it is rarely a good deal elsewhere.</p>
+          </article>
+          <article class="habit">
+            <h3>Bet the same amount</h3>
+            <p>Flat betting keeps the maths simple and stops one bad hand from erasing a good session.</p>
+          </article>
+          <article class="habit">
+            <h3>Set a stopping point</h3>
+            <p>Decide in advance when you will stop — win or lose. The table will still be here tomorrow.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker"><span>05</span> — Questions</p>
+            <h2 class="section-title" id="faq-title">Answers before you ante.</h2>
+          </div>
+          <p class="section-lede">The short version: free, private, virtual chips only. Here are the details people ask about most.</p>
+        </div>
+
+        <div class="faq-grid">
+          <article class="faq-item">
+            <h3>Is Neon Ace really free?</h3>
+            <p>Yes. The game is free to play, has no ads, no in-app purchases and no account requirement. There is no paid tier or hidden wagering.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Can I win real money?</h3>
+            <p>No. Chips are virtual, have no cash value and cannot be deposited or withdrawn. Neon Ace is an entertainment and practice game, not a gambling service. If gambling is affecting your life, support is available at <a href="https://www.begambleaware.org/" rel="noopener">BeGambleAware.org</a>.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Do I need to install anything?</h3>
+            <p>No. It is a single static web page. Open it in a current version of Chrome, Safari, Firefox or Edge and press Deal. There is no app, plug-in or account.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Does it work on a phone?</h3>
+            <p>Yes. The table is responsive, the controls are touch-sized and the layout works in portrait on modern phones. Keyboard shortcuts are a bonus for desktop players.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Is the shuffle fair?</h3>
+            <p>The shoe is shuffled locally with a Fisher–Yates shuffle driven by the Web Crypto API, then reshuffled at roughly 75% penetration. It is designed for fair practice, not for regulated or audited gambling.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Does the game save my progress?</h3>
+            <p>Your bankroll, sound setting and session stats are saved in your browser's local storage. The game sets no cookies and runs no analytics. Use the Reset control to clear the saved data.</p>
+          </article>
+          <article class="faq-item">
+            <h3>What blackjack rules are used?</h3>
+            <p>Six decks, dealer stands on all 17s, blackjack pays 3:2, double on any first two cards including after a split, and up to four hands. Insurance and surrender are not offered. The <a href="#rules">full rules table</a> has every detail.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Can I count cards?</h3>
+            <p>You can track cards mentally, but the shoe reshuffles at about 75% penetration and there is no cash prize. Neon Ace is a place to practise decisions, not an advantage-play target.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Is the game accessible?</h3>
+            <p>Yes — keyboard shortcuts, visible focus, screen-reader labels on every card, live status announcements, a reduced-motion mode and body text that targets WCAG 2.2 AA contrast. See the <a href="#about">accessibility notes</a>.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Do I need to create an account?</h3>
+            <p>No. There is no sign-up, email capture or profile. Your virtual bankroll lives only in this browser, which also means clearing site data or switching devices starts you fresh.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker"><span>06</span> — Behind the table</p>
+            <h2 class="section-title" id="about-title">Small game. Deliberate choices.</h2>
+          </div>
+          <p class="section-lede">Neon Ace is a counterpoint to heavyweight casino sites: one page, no trackers, no downloads, and a game loop that starts in under a second after the page loads.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="prose">
+            <h3>From shortlist to table</h3>
+            <p>The concept came from a screening of open-source and jam-scale browser games. The strongest projects had three things in common: instant play, a ruleset that fits on one screen, and feedback that arrives immediately. Blackjack was the right fit — deep enough to reward strategy, small enough to run as a single static page.</p>
+            <p>The implementation is original HTML, CSS and vanilla JavaScript. There are no frameworks, remote fonts, tracking scripts or third-party embeds. The only network request is for the page itself and its local assets; after that, every hand is dealt on your device.</p>
+
+            <h3>Accessibility is part of the game</h3>
+            <p>Cards expose their rank and suit to assistive technology, score changes are announced through a polite live region, and every action is a real button. The table can be played with the keyboard, focus is always visible, and animations collapse when the operating system requests reduced motion. There are no time limits or flashing effects.</p>
+
+            <h3>What the game does not do</h3>
+            <p>It does not take payments, offer real-money gambling, sell chips, show ads, create accounts or send gameplay data to a server. Virtual chips have no cash value. The game is intended for adults who enjoy card-game strategy and for anyone curious about how blackjack decisions work.</p>
+
+            <h3>Rules accuracy and review</h3>
+            <p>The dealer follows the six-deck S17 ruleset documented above. Casino rules vary, so a hand played here may resolve differently at another table. This page is reviewed with each release; the update date at the top reflects the last rules or copy review.</p>
+
+            <div class="accessibility-note">
+              <h3>Accessibility statement</h3>
+              <p>Target: WCAG 2.2 AA for the page and game controls. Support includes keyboard operation, visible focus, semantic landmarks, screen-reader labels, reduced motion and no time-limited interactions. If you encounter a barrier, the source is available for inspection and improvement.</p>
+            </div>
+          </div>
+
+          <aside class="sources" aria-labelledby="sources-title">
+            <h3 id="sources-title">How the concept was screened</h3>
+            <p>Reference points from the open-source game community, reviewed while shaping the scope and rules.</p>
+            <ol class="sources-list">
+              <li>
+                <a href="https://github.com/topics/open-source-games">GitHub Topics — Open Source Games</a>
+                <span>Browser-first, no-install projects reinforced a single-page, dependency-free scope.</span>
+              </li>
+              <li>
+                <a href="https://itch.io/games/tag-open-source">itch.io — games tagged Open Source</a>
+                <span>Instant-play HTML5 conventions: one screen, visible rules, a fast restart.</span>
+              </li>
+              <li>
+                <a href="https://github.com/trending">GitHub Trending</a>
+                <span>Daily JavaScript game projects; kept the build vanilla and the payload small.</span>
+              </li>
+              <li>
+                <a href="https://github.com/orgs/LudumDare/repositories">Ludum Dare repositories</a>
+                <span>Jam-sized rules and feedback loops inspired the short round and clear result states.</span>
+              </li>
+              <li>
+                <a href="https://simplegametutorials.github.io/">Simple Game Tutorials</a>
+                <span>Incremental, readable game loops shaped the state machine and keyboard controls.</span>
+              </li>
+              <li>
+                <a href="https://github.com/ChrisZieba/blackjack">Chris Zieba — blackjack (MIT)</a>
+                <span>Rules reference for hand values, splits and dealer play. No code or assets are bundled.</span>
+              </li>
+            </ol>
+            <p class="sources-note">Screening notes are for transparency. Neon Ace is not affiliated with GitHub, itch.io, Ludum Dare or any casino operator.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="./" aria-label="Neon Ace home">
+          <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+            <rect x="1" y="1" width="38" height="38" rx="9" fill="#0d2a21" stroke="#e8c879" stroke-width="1.5"/>
+            <path d="M20 7.5c-4.2 4.8-8 8-8 12.4 0 3 2.3 5.3 5.2 5.3 1.5 0 2.6-.6 3.5-1.6-.3 2.2-1.1 3.7-2.3 4.8h3.2c-1.2-1.1-2-2.6-2.3-4.8.9 1 2 1.6 3.5 1.6 2.9 0 5.2-2.3 5.2-5.3 0-4.4-3.8-7.6-8-12.4z" fill="#f5efe2"/>
+          </svg>
+          <span class="brand-name">Neon <span>Ace</span></span>
+        </a>
+        <p>Free browser blackjack with a six-deck shoe, honest rules and virtual chips. No account, no install, no real money.</p>
+        <div class="footer-badges">
+          <span>Static &amp; fast</span>
+          <span>No trackers</span>
+          <span>WCAG-minded</span>
+        </div>
+      </div>
+
+      <nav class="footer-cols" aria-label="Footer">
+        <div>
+          <h2 class="footer-title">Play</h2>
+          <ul>
+            <li><a href="#table">Blackjack table</a></li>
+            <li><a href="baccarat">Baccarat</a></li>
+            <li><a href="slots">Slot demo</a></li>
+            <li><a href="#how-to-play">How to play</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">Learn</h2>
+          <ul>
+            <li><a href="#strategy">Hard-total chart</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#about">Accessibility</a></li>
+            <li><a href="#about">Sources</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">About</h2>
+          <ul>
+            <li><a href="#about">The project</a></li>
+            <li><a href="llms.txt">llms.txt</a></li>
+            <li><a href="sitemap.xml">Sitemap</a></li>
+            <li><a href="https://www.begambleaware.org/" rel="noopener">Gambling support</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="wrap footer-bottom">
+      <p>© 2026 Neon Ace. Free browser blackjack for entertainment and practice.</p>
+      <p class="footer-legal"><strong>18+ · Virtual chips only.</strong> No real money, prizes or gambling services are offered. Chips have no cash value. If gambling is affecting your life, visit <a href="https://www.begambleaware.org/" rel="noopener">BeGambleAware.org</a>.</p>
+    </div>
+  </footer>
+
+
+  <dialog class="reset-dialog" id="reset-dialog" aria-labelledby="reset-title" aria-describedby="reset-desc">
+    <form method="dialog">
+      <h2 id="reset-title">Reset your table?</h2>
+      <p id="reset-desc">This clears your saved bankroll and session stats, then returns you to 1,000 virtual chips. Any hand in progress is void. This cannot be undone.</p>
+      <div class="dialog-actions">
+        <button class="btn btn-ghost" value="cancel">Keep playing</button>
+        <button class="btn btn-primary" id="confirm-reset" value="reset">Reset to 1,000</button>
+      </div>
+    </form>
+  </dialog>
+
+
+  <script src="assets/app.js?v=20261115211645" defer></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+name: neon_ace_flutter
+description: "Neon Ace - free browser blackjack, Flutter Web edition with Firebase AI Logic."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.6.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  firebase_core: ^5.1.0
+  firebase_ai: ^5.1.0
+
+flutter:
+  uses-material-design: true

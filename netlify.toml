@@ -1,0 +1,7 @@
+# Neon Ace — Netlify configuration
+# Headers and cache policy live in site/_headers and are copied to dist/_headers.
+# Netlify publishes the prebuilt dist/ directory, so no build command is needed.
+# Rebuild locally with: powershell -ExecutionPolicy Bypass -File scripts/build.ps1
+
+[build]
+  publish = "dist"

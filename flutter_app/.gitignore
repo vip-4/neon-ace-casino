@@ -1,0 +1,10 @@
+# Flutter / Dart generated files
+.dart_tool/
+.packages
+.flutter-plugins
+.flutter-plugins-dependencies
+flutter_*.png
+build/
+.idea/
+.vscode/
+*.log
