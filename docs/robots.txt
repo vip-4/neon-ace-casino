@@ -37,4 +37,4 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
-Sitemap: https://neon-ace.web.app/sitemap.xml
+Sitemap: https://vip-4.github.io/neon-ace-casino/sitemap.xml
