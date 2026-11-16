@@ -1,0 +1,134 @@
+# Neon Ace — Free Browser Blackjack
+
+> Neon Ace is a free, single-page blackjack game that runs entirely in the browser with virtual chips. It uses a six-deck shoe, pays blackjack at 3:2, supports hit, stand, double and split, and requires no account, download or real-money wagering.
+
+Canonical: https://neon-ace.web.app/
+Last updated: 2026-11-16
+Language: English (en)
+License: MIT (site code)
+Contact: no accounts or support inbox; this is a self-contained static game.
+
+## Quick facts
+
+- Game: blackjack (21)
+- Price: free
+- Sign-up: none
+- Install: none
+- Platform: any modern desktop or mobile browser
+- Chips: virtual only; no cash value
+- Shoe: six decks (312 cards), reshuffled at roughly 75% penetration
+- Blackjack payout: 3:2
+- Dealer: stands on all 17s (S17)
+- Double: any first two cards, including after a split
+- Split: up to four hands; split aces receive one card each and cannot be resplit
+- Insurance and surrender: not offered
+- Data: bankroll, sound setting and session stats are stored in the browser's localStorage
+- Analytics and cookies: none set by the game
+- Accessibility: keyboard shortcuts, visible focus, screen-reader card labels and reduced-motion support
+
+## Key sections
+
+- [Play the table](https://neon-ace.web.app/#table): the complete blackjack game above the fold.
+- [How to play](https://neon-ace.web.app/#how-to-play): four steps from placing a bet to the next hand.
+- [Rules at a glance](https://neon-ace.web.app/#rules): exact house rules used by the game.
+- [Basic strategy](https://neon-ace.web.app/#strategy): a compact hard-total chart and practical advice.
+- [FAQ](https://neon-ace.web.app/#faq): free play, fairness, privacy, mobile support and gambling safety.
+- [About and sources](https://neon-ace.web.app/#about): how the game was scoped and built.
+- [Canvas slot reel demo](https://neon-ace.web.app/slots): a separate, runnable 3x5 HTML5 Canvas prototype with back-out easing stops, Big Win coin particles, and a DPR / deltaTime fix.
+- [Baccarat (Punto Banco)](https://neon-ace.web.app/baccarat): a free browser baccarat demo with virtual chips, 8-deck shoe, Player/Banker/Tie bets, standard third-card tableau and indexable rules/FAQ.
+- [Sic Bo (骰寶)](https://neon-ace.web.app/sicbo): a free browser Sic Bo dice demo with virtual chips, three-dice Canvas rolls and common bets (Big/Small, Odd/Even, Any/Specific Triple) plus indexable rules/FAQ.
+- [European Roulette (輪盤)](https://neon-ace.web.app/roulette): a free browser European (single-zero) roulette demo with virtual chips, animated Canvas wheel and common inside/outside bets plus indexable rules/FAQ.
+- [Video Poker — Jacks or Better](https://neon-ace.web.app/videopoker): a free browser video poker demo with virtual credits, 5-card hold/draw gameplay and a standard 9/6 paytable plus indexable rules/FAQ.
+
+## Canvas slot reel demo (quick facts for summaries)
+
+- URL: https://neon-ace.web.app/slots · pure vanilla JavaScript, Canvas 2D, no libraries, no build step.
+- Grid: 3 rows x 5 reels, 8 symbols drawn once into an offscreen sprite atlas.
+- Motion: cubic ease-in acceleration to 19 symbols/second over 0.55 s, constant-speed scroll, then staggered stops 0.17 s apart using easeOutBack (overshoot then settle).
+- Big Win: 0.80-alpha background dim, three coin emission waves with gravity 1500 px/s^2 producing parabolic arcs, and an easeOutCubic count-up to the payout number.
+- Object pooling: 200 pre-allocated coin objects, no allocations inside the render loop.
+- Retina: backing store scaled by devicePixelRatio capped at 2.5, with setTransform(dpr*scale, ...) so all drawing uses logical coordinates; sprites rebuild when DPR changes.
+- Timing: single requestAnimationFrame loop, dt clamped to 0.05 s, fixed 1/120 s physics steps, time base and accumulator reset on visibilitychange to prevent the tab-restore jump.
+- Security boundary: the browser does not compute RNG or payouts; a replaceable OutcomeProvider supplies results (demo uses a fixed script, production uses a signed POST /api/spin response).
+- Accessibility: canvas text alternatives, native 44px buttons, aria-live status, prefers-reduced-motion shortens the show to 20 coins.
+
+## Baccarat (Punto Banco) demo (quick facts for summaries)
+
+- URL: https://neon-ace.web.app/baccarat · free, virtual-chip browser baccarat demo (no sign-up, no download, no real money).
+- Ruleset: standard Punto Banco, 8-deck shoe reshuffled when low, Player/Banker/Tie bets.
+- Payouts (demo): Player 1:1, Banker 0.95:1 (5% commission), Tie 8:1; on a Tie, Player and Banker bets push.
+- Drawing: naturals 8/9 settle immediately; otherwise fixed third-card tableau (Player draws on 0–5; Banker draw depends on Banker total and, when Player drew, Player’s third-card value).
+- Implementation: native HTML5 Canvas 2D + vanilla ES6+, DPR-aware rendering, fixed-timestep loop with deltaTime clamp/reset on visibilitychange, Web Crypto shuffle for local demo RNG.
+- Security boundary: presentation/entertainment only — real-money, ranked or redeemable products must use server-authoritative RNG, payout calculation and signed/verified results.
+- Accessibility & storage: semantic indexable rules/FAQ/JSON-LD, 44px touch targets, aria-live status, visible focus, prefers-reduced-motion support; bankroll/stats/sound stored locally in localStorage only.
+
+## Sic Bo (骰寶) demo (quick facts for summaries)
+
+- URL: https://neon-ace.web.app/sicbo · free, virtual-chip browser Sic Bo dice demo (no sign-up, no download, no real money).
+- Game: three six-sided dice (sum 3–18); animated Canvas rolls.
+- Bets/payouts in this demo: Small 4–10 (1:1), Big 11–17 (1:1), Odd/Even (1:1) — triples lose on Big/Small/Odd/Even in this demo rule; Any Triple 30:1; Specific Triple 180:1 (select 1-1-1 to 6-6-6). Full tables offer additional totals/doubles/combinations.
+- Implementation: native HTML5 Canvas 2D + vanilla ES6+, DPR-aware rendering, fixed-timestep loop with deltaTime clamp/reset on visibilitychange, Web Crypto dice RNG for local demo.
+- Security boundary: presentation/entertainment only — real-money, ranked or redeemable products must use server-authoritative RNG, payout calculation and signed/verified results.
+- Accessibility & storage: semantic indexable rules/FAQ/JSON-LD, 44px touch targets, aria-live status, visible focus, prefers-reduced-motion; bankroll/stats/sound stored locally in localStorage only.
+
+## European Roulette (輪盤) demo (quick facts for summaries)
+
+- URL: https://neon-ace.web.app/roulette · free, virtual-chip browser European roulette demo (no sign-up, no download, no real money).
+- Wheel: single-zero European layout (0–36, 37 pockets), animated Canvas spin with deceleration.
+- Bets/payouts in this demo: Straight-up 35:1, Red/Black 1:1, Odd/Even 1:1, Low 1–18/High 19–36 1:1, Dozens 2:1, Columns 2:1 (split/corner/line bets not included in this lightweight demo).
+- Implementation: native HTML5 Canvas 2D + vanilla ES6+, DPR-aware rendering, fixed-timestep loop with deltaTime clamp/reset on visibilitychange, Web Crypto RNG for local demo.
+- Security boundary: presentation/entertainment only — real-money, ranked or redeemable products must use server-authoritative RNG, payout calculation and signed/verified results.
+- Accessibility & storage: semantic/indexable bet layout rules/FAQ/JSON-LD, touch-sized controls, aria-live status, visible focus, prefers-reduced-motion; bankroll/stats/sound stored locally in localStorage only.
+
+## Video Poker — Jacks or Better (quick facts for summaries)
+
+- URL: https://neon-ace.web.app/videopoker · free, virtual-credit browser video poker demo (no sign-up, no download, no real money).
+- Variant: Jacks or Better (9/6 demo paytable). Deal 5 cards from a shuffled 52-card deck, hold any, draw once, evaluate final hand.
+- Payouts (× bet): Royal Flush 250, Straight Flush 50, Four of a Kind 25, Full House 9, Flush 6, Straight 4, Three of a Kind 3, Two Pair 2, Jacks or Better 1.
+- Implementation: native HTML5 Canvas 2D + vanilla ES6+, DPR-aware rendering, fixed-timestep loop with deltaTime clamp/reset on visibilitychange, Web Crypto shuffle for local demo.
+- Security boundary: presentation/entertainment only — real-money, ranked or redeemable products must use server-authoritative RNG, payout calculation and signed/verified results.
+- Accessibility & storage: semantic indexable rules/paytable/FAQ/JSON-LD, hold buttons + canvas tap, 44px controls, aria-live status, visible focus, prefers-reduced-motion; credits/stats/sound stored locally in localStorage only.
+
+## FAQ
+
+### Is Neon Ace free?
+Yes. The game is free to play, has no ads or in-app purchases, and does not require an account.
+
+### Can I win real money?
+No. Neon Ace is an entertainment and practice game. Chips are virtual, have no cash value and cannot be withdrawn. It is not a gambling service.
+
+### Does it work on a phone?
+Yes. The table is responsive, all controls are touch-sized, and the game works in current versions of Chrome, Safari, Firefox and Edge.
+
+### Is the shoe random?
+The shoe is shuffled in the browser with a Fisher-Yates shuffle seeded by the Web Crypto API, then reshuffled at about 75% penetration. It is designed for fair practice, not for regulated or audited gambling.
+
+### Does the game save my progress?
+Your bankroll, sound preference and session stats are saved in your browser's localStorage. The Reset control clears that local data. No account, server database or analytics service is involved.
+
+### Is card counting allowed?
+You can track cards mentally, but the shoe reshuffles at roughly 75% penetration and the game is for practice only. There is no cash prize and no advantage play to protect.
+
+### What blackjack rules are used?
+Six decks, dealer stands on all 17s, blackjack pays 3:2, double on any first two cards including after a split, split up to four hands, split aces get one card each, and no insurance or surrender. Dealer peeks for blackjack when showing an ace or ten-value card.
+
+### Is the game accessible?
+The game provides keyboard operation (H, S, D, P, N), visible focus styles, screen-reader labels for every card, live status announcements and a reduced-motion mode. Body text targets WCAG 2.2 AA contrast.
+
+## Sources and background
+
+- GitHub Topics — Open Source Games: https://github.com/topics/open-source-games
+- itch.io — games tagged Open Source: https://itch.io/games/tag-open-source
+- GitHub Trending: https://github.com/trending
+- Ludum Dare: https://ldjam.com/ and https://github.com/orgs/LudumDare/repositories
+- Simple Game Tutorials: https://simplegametutorials.github.io/
+- Open-source rules reference: https://github.com/ChrisZieba/blackjack (MIT)
+
+## Citation
+
+"Neon Ace — Free Blackjack Game" — https://neon-ace.web.app/
+A free browser blackjack game with virtual chips, six decks and standard S17 rules. Last reviewed 2026-11-16.
+
+## Responsible play
+
+Neon Ace offers simulated casino play for entertainment only. It does not accept deposits or pay winnings. If gambling is affecting your life, support is available at https://www.begambleaware.org/.

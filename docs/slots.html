@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>3×5 Slot Reel Demo — Canvas Easing, Big Win FX &amp; DPR Fix | Neon Ace</title>
+  <meta name="description" content="A working native HTML5 Canvas 3×5 slot reel demo: eased acceleration, constant-speed scrolling, sequential back-out stops, a full-screen Big Win coin-particle celebration, plus DPR scaling and fixed-timestep deltaTime correction. Vanilla JS, no libraries.">
+  <meta name="keywords" content="HTML5 Canvas slot machine, 3x5 reel, easeOutBack, back-out easing, slot reel physics, Big Win particle system, coin particles, requestAnimationFrame, devicePixelRatio, DPR canvas, deltaTime fixed timestep, object pooling, OffscreenCanvas, sprite atlas, vanilla JavaScript casino game">
+  <meta name="author" content="Neon Ace">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="theme-color" content="#07120f">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://neon-ace.web.app/slots">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Neon Ace">
+  <meta property="og:title" content="3×5 Slot Reel Demo — Canvas Easing, Big Win FX &amp; DPR Fix">
+  <meta property="og:description" content="Native Canvas slot reels with back-out easing stops, a physics coin-particle Big Win, and a complete Retina/DPR + deltaTime fix. No frameworks, no inline scripts.">
+  <meta property="og:url" content="https://neon-ace.web.app/slots">
+  <meta property="og:image" content="https://neon-ace.web.app/assets/og-cover.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Neon Ace — free browser casino games built with plain HTML, CSS and JavaScript">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="3×5 Slot Reel Demo — Canvas Easing, Big Win FX &amp; DPR Fix">
+  <meta name="twitter:description" content="Back-out easing reel stops, parabolic coin particles, count-up win numbers, DPR scaling and fixed-timestep deltaTime — all in vanilla Canvas JS.">
+  <meta name="twitter:image" content="https://neon-ace.web.app/assets/og-cover.png">
+  <meta name="twitter:image:alt" content="Neon Ace — free browser casino games built with plain HTML, CSS and JavaScript">
+  <meta name="twitter:url" content="https://neon-ace.web.app/slots">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="assets/slot-demo.css?v=20261116014412">
+
+  <!-- Structured data: the Canvas itself is not indexable, so the facts live here. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://neon-ace.web.app/#website",
+        "url": "https://neon-ace.web.app/",
+        "name": "Neon Ace",
+        "inLanguage": "en"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://neon-ace.web.app/slots#webpage",
+        "url": "https://neon-ace.web.app/slots",
+        "name": "3×5 Slot Reel Demo — Canvas Easing, Big Win FX & DPR Fix",
+        "description": "An executable native HTML5 Canvas slot-machine reel demo with eased acceleration, back-out sequential stops, a Big Win particle celebration, and DPR/deltaTime corrections.",
+        "isPartOf": { "@id": "https://neon-ace.web.app/#website" },
+        "breadcrumb": { "@id": "https://neon-ace.web.app/slots#breadcrumb" },
+        "dateModified": "2026-11-16",
+        "inLanguage": "en"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://neon-ace.web.app/slots#breadcrumb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Neon Ace", "item": "https://neon-ace.web.app/" },
+          { "@type": "ListItem", "position": 2, "name": "Slot Reel Demo", "item": "https://neon-ace.web.app/slots" }
+        ]
+      },
+      {
+        "@type": "VideoGame",
+        "@id": "https://neon-ace.web.app/slots#game",
+        "name": "Neon Ace Slot Reel Demo",
+        "genre": "Slot machine demo",
+        "playMode": "SinglePlayer",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Any modern web browser",
+        "description": "A free, non-wagering 3 row by 5 reel Canvas animation demo. It is a presentation-layer prototype: outcomes come from a replaceable provider, and no payout logic runs in the browser.",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "HowTo",
+        "@id": "https://neon-ace.web.app/slots#howto",
+        "name": "How the 3×5 slot reel animation works",
+        "description": "Three motion phases per reel, driven by a fixed-timestep state machine.",
+        "step": [
+          {
+            "@type": "HowToStep", "position": 1, "name": "Acceleration",
+            "text": "Velocity ramps from 0 to 19 symbols per second with cubic ease-in over 0.55 seconds, so the reel feels like a motor pulling it up to speed."
+          },
+          {
+            "@type": "HowToStep", "position": 2, "name": "Constant-speed scroll",
+            "text": "The reel advances at a fixed 19 symbols per second. Symbols are drawn from a pre-rendered sprite atlas with one extra row above and below the viewport to avoid gaps."
+          },
+          {
+            "@type": "HowToStep", "position": 3, "name": "Sequential back-out stop",
+            "text": "Reels stop 0.17 seconds apart. Each uses easeOutBack, which overshoots the target position before settling, creating the mechanical latch-and-rebound feel of a physical slot machine."
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://neon-ace.web.app/slots#faq",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is this a real-money slot machine?", "acceptedAnswer": { "@type": "Answer", "text": "No. It is a free animation demo with virtual credits only. There are no deposits, wagers or cash payouts." } },
+          { "@type": "Question", "name": "Does the browser decide wins?", "acceptedAnswer": { "@type": "Answer", "text": "No. The demo plays a pre-written scripted set of outcomes through a replaceable OutcomeProvider. In production a server-authoritative endpoint supplies RNG, payout and a signature; the client only renders the result." } },
+          { "@type": "Question", "name": "Why did my Canvas look blurry on an iPhone Retina screen?", "acceptedAnswer": { "@type": "Answer", "text": "Because the canvas backing store was sized in CSS pixels. Multiply width and height by devicePixelRatio, then call setTransform(dpr,0,0,dpr,0,0) so all drawing stays in logical coordinates. This demo caps DPR at 2.5 to protect fill rate." } },
+          { "@type": "Question", "name": "Why does animation jump after switching tabs?", "acceptedAnswer": { "@type": "Answer", "text": "requestAnimationFrame pauses in a hidden tab while performance.now() keeps advancing, producing a huge delta on return. Clamp dt to 0.05 seconds, reset the time base on visibilitychange, and integrate physics with a fixed 1/120 second step." } },
+          { "@type": "Question", "name": "Which libraries does it use?", "acceptedAnswer": { "@type": "Answer", "text": "None. It is vanilla ES6+ JavaScript with Canvas 2D, Web Audio API, OffscreenCanvas with a fallback, and no build step." } },
+          { "@type": "Question", "name": "Is it accessible?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Canvases have text alternatives, controls are native buttons with 44px targets, status uses an aria-live region, and prefers-reduced-motion shortens the presentation and reduces particle count." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html" aria-label="Neon Ace home">
+        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+          <rect x="1" y="1" width="38" height="38" rx="9" fill="#0d2a21" stroke="#e8c879" stroke-width="1.5"/>
+          <path d="M20 7.5c-4.2 4.8-8 8-8 12.4 0 3 2.3 5.3 5.2 5.3 1.5 0 2.6-.6 3.5-1.6-.3 2.2-1.1 3.7-2.3 4.8h3.2c-1.2-1.1-2-2.6-2.3-4.8.9 1 2 1.6 3.5 1.6 2.9 0 5.2-2.3 5.2-5.3 0-4.4-3.8-7.6-8-12.4z" fill="#f5efe2"/>
+        </svg>
+        <span class="brand-name">Neon <span>Ace</span></span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Blackjack</a>
+        <a href="slots" aria-current="page">Slot demo</a>
+        <a href="baccarat">Baccarat</a>
+        <a href="sicbo">Sic Bo</a>
+        <a href="roulette">Roulette</a>
+        <a href="videopoker">Video Poker</a>
+        <a href="#reels">Reels</a>
+        <a href="#bigwin">Big Win</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">Canvas engineering note</p>
+      <h1 id="page-title">3×5 slot reels, a Big Win blast, and a crisp Retina fix</h1>
+      <p class="lede">
+        A runnable, framework-free HTML5 Canvas demo: five reels by three rows start with
+        cubic ease-in acceleration, hold a constant scroll speed, then stop one after another
+        with <strong>back-out easing</strong>. Wins trigger a full-screen celebration with a dimmed
+        backdrop, parabolic coin particles and a count-up number. The whole thing is DPR-aware
+        and uses a clamped, fixed-timestep deltaTime so it never lurches when you return to the tab.
+      </p>
+      <p class="hint">
+        This is a <strong>presentation-layer prototype</strong>. There is no wagering, and the
+        browser does not decide wins — outcomes arrive through a replaceable provider interface.
+      </p>
+    </section>
+
+    <!-- ============ 可執行的示範 ============ -->
+    <section id="slot-demo" aria-labelledby="demo-title">
+      <h2 id="demo-title">Try it</h2>
+      <div class="demo-panel">
+        <div class="canvas-holder">
+          <canvas id="slot-canvas" role="img"
+                  aria-label="Five slot machine reels with three symbol rows. The reels accelerate, spin, then stop left to right with a rebound.">
+            Your browser does not support Canvas. The written explanation below covers the same
+            animation stages, easing curve, particle system and timing correction in full.
+          </canvas>
+        </div>
+
+        <div class="controls">
+          <button type="button" class="btn btn-primary" id="spin-btn">Spin</button>
+          <button type="button" class="btn btn-ghost" id="mute-btn" aria-pressed="false">Sound off</button>
+        </div>
+
+        <dl class="readout">
+          <div>
+            <dt>Last win</dt>
+            <dd class="win"><output id="slot-win">0</output></dd>
+          </div>
+          <div>
+            <dt>State</dt>
+            <dd>IDLE → SPINNING → STOPPING → SETTLE → WIN_PRESENTATION</dd>
+          </div>
+        </dl>
+        <p id="slot-status" role="status" aria-live="polite">Preparing…</p>
+        <p class="hint">Keyboard: focus this demo and press <kbd>S</kbd> to spin. All controls are native buttons.</p>
+      </div>
+      <noscript>
+        <p class="hint">JavaScript is required to run the Canvas demo. The complete implementation notes below remain readable and indexable.</p>
+      </noscript>
+    </section>
+
+    <!-- ============ 可索引的技術內文（GEO 重點） ============ -->
+    <section id="reels" aria-labelledby="reels-title">
+      <h2 id="reels-title">1 · Reel motion: accelerate → cruise → back-out stop</h2>
+      <p>
+        Each of the five reels holds a float <code>offset</code> measured in <em>symbol units</em>.
+        Velocity is in symbols per second. A reel draws the symbol at
+        <code>(floor(offset) + row) mod 8</code>, and the fractional part of <code>offset</code>
+        shifts every cell upward by that fraction of one row step. Drawing one extra row above
+        and below the visible three prevents any gap from appearing mid-scroll.
+      </p>
+
+      <div class="grid">
+        <article class="card">
+          <h3>Phase A — acceleration (0.55 s)</h3>
+          <p>
+            <code>v = MAX_V · t³</code> with <code>MAX_V = 19</code> symbols/s. Cubic ease-in means
+            the first 0.2 s barely moves and the last 0.2 s does most of the work — exactly like a
+            motor overcoming inertia. A linear ramp would feel like a hard clutch engagement.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Phase B — constant scroll</h3>
+          <p>
+            <code>offset += v · dt</code> at fixed velocity. A faint translucent streak per row
+            suggests motion blur without real per-pixel blurring, which would blow the fill-rate
+            budget on mobile.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Phase C — sequential back-out stop</h3>
+          <p>
+            Reels stop 0.17 s apart. With <code>c1 = 1.70158</code> and <code>c3 = c1 + 1</code>:
+          </p>
+          <pre><code>easeOutBack(t) = 1 + c3·(t−1)³ + c1·(t−1)²
+offset = from + (target − from) · easeOutBack(t)</code></pre>
+          <p>
+            Because the curve exceeds 1 near <code>t ≈ 0.7</code>, the reel physically
+            <strong>overshoots the payline and springs back</strong> — the mechanical latch feel.
+            <code>target</code> is computed so the requested symbol lands on the centre row, and
+            at least two extra symbol units are added so a reel never snaps to a halt.
+          </p>
+        </article>
+      </div>
+
+      <h3>State machine</h3>
+      <p>
+        The machine-level flow is <code>IDLE → SPINNING → STOPPING → SETTLE → WIN_PRESENTATION → IDLE</code>.
+        The outcome request is fired in parallel with the spin; reels only begin stopping once both
+        the minimum spin time has elapsed <em>and</em> the outcome has arrived. A slow backend
+        therefore keeps the reels turning instead of freezing them.
+      </p>
+    </section>
+
+    <section id="bigwin" aria-labelledby="bigwin-title">
+      <h2 id="bigwin-title">2 · Big Win: dim, parabolic coins, count-up number</h2>
+      <p>
+        A second, fixed, full-screen canvas sits above the page with
+        <code>pointer-events: none</code> so it never eats button clicks. Three things happen
+        together over 3.6 seconds:
+      </p>
+      <ol>
+        <li><strong>Background dim</strong> — an <code>rgba(3,10,8,α)</code> fill whose alpha is tweened in over 0.28 s and out over the last 0.55 s.</li>
+        <li><strong>Coin burst</strong> — three emission waves at 0.05 s, 0.42 s and 0.85 s. Coins spawn just below the bottom edge with an upward-biased angle and speed 620–1240 px/s; gravity is 1500 px/s², so each follows <code>y = y₀ + v_y·t + ½g·t²</code>. Spin and alpha fade as they fall back.</li>
+        <li><strong>Number tween</strong> — the payout counts from 0 to the result with <code>easeOutCubic</code>, so it sprints early and eases into the exact final figure. Formatting uses one cached <code>Intl.NumberFormat</code> instance, not a fresh one per frame.</li>
+      </ol>
+      <p>
+        The "BIG WIN" heading scales in with the same <code>easeOutBack</code> as the reels, which
+        ties the celebration visually to the stop. Web Audio plays a four-note arpeggio, but the
+        <code>AudioContext</code> is only created on the first user gesture — browsers block audio
+        before that, and creating it on page load just leaves a suspended context.
+      </p>
+    </section>
+
+    <section id="perf" aria-labelledby="perf-title">
+      <h2 id="perf-title">3 · DPR scaling and the deltaTime fix</h2>
+
+      <h3>Why Retina looks blurry</h3>
+      <p>
+        A canvas has two sizes: its CSS box and its backing store. If you only set CSS width/height,
+        the browser stretches a 1× bitmap across a 2× or 3× display. Fix both:
+      </p>
+      <pre><code>var dpr = Math.min(devicePixelRatio || 1, 2.5);
+canvas.width  = Math.round(cssW * dpr);
+canvas.height = Math.round(cssH * dpr);
+canvas.style.width  = cssW + 'px';
+canvas.style.height = cssH + 'px';
+ctx.setTransform(dpr, 0, 0, dpr, 0, 0);  // 之後都用邏輯座標畫
+</code></pre>
+      <p>
+        Here the board is authored once at a fixed logical size and scaled by
+        <code>scale = cssW / boardW</code>, so the effective transform is
+        <code>setTransform(dpr·scale, 0, 0, dpr·scale, 0, 0)</code>. The symbol atlas and coin
+        sprite are re-rendered at the new DPR on every change. DPR is capped at 2.5: a 3× phone
+        would otherwise allocate nine times the pixels and halve the frame rate for a gain nobody
+        can see. A <code>matchMedia('(resolution: …dppx)')</code> listener catches the case where
+        the window is dragged to a monitor with a different density.
+      </p>
+
+      <h3>Why it lurches after switching tabs</h3>
+      <p>
+        <code>requestAnimationFrame</code> is throttled or paused in a hidden tab while
+        <code>performance.now()</code> keeps counting. On return, one frame can carry a delta of
+        several seconds, so positions integrate in a single giant step — the "暴衝". The fix has
+        three parts:
+      </p>
+      <pre><code>// 1) 單幀 dt 鉗制
+dt = Math.min((now - lastTime) / 1000, 0.05);
+
+// 2) 固定時間步長積分（物理與幀率解耦）
+accumulator += dt;
+while (accumulator &gt;= 1/120 &amp;&amp; steps &lt; 8) {
+  update(1/120); accumulator -= 1/120; steps++;
+}
+if (steps === 8) accumulator = 0;   // 防止死亡螺旋
+
+// 3) 分頁切換時重設時間基準
+document.addEventListener('visibilitychange', function () {
+  if (document.hidden) { cancelAnimationFrame(raf); lastTime = 0; accumulator = 0; }
+  else { lastTime = 0; accumulator = 0; requestAnimationFrame(frame); }
+});
+</code></pre>
+      <p>
+        Fixed steps also make the coin physics deterministic regardless of whether the device
+        renders at 60 Hz or 120 Hz. An <code>IntersectionObserver</code> additionally skips reel
+        drawing when the demo scrolls out of view while the state machine keeps running.
+      </p>
+
+      <h3>Where the frame budget goes</h3>
+      <ul>
+        <li><strong>Zero allocations in the loop</strong> — a 200-slot coin pool is allocated once; emission reuses inactive slots and silently drops particles when full.</li>
+        <li><strong>Offscreen sprite atlas</strong> — eight symbols are rasterised once, then blitted with <code>drawImage</code>; no per-frame path or text work.</li>
+        <li><strong>Fewer state switches</strong> — coin rotation uses <code>setTransform</code> directly instead of 200 <code>save/restore</code> pairs; <code>shadowBlur</code> is applied to two text draws per frame, never per particle.</li>
+        <li><strong>Precision hygiene</strong> — <code>offset</code> is reduced modulo the symbol count once all reels settle, so long sessions never accumulate float drift.</li>
+      </ul>
+    </section>
+
+    <section id="architecture" aria-labelledby="architecture-title">
+      <h2 id="architecture-title">Architecture &amp; the security boundary</h2>
+      <p>
+        The file <code>assets/slot-machine.js</code> is a single IIFE split into
+        <code>OutcomeProvider</code>, <code>Reel</code>, <code>CoinPool</code>,
+        <code>BigWinFX</code>, <code>ViewManager</code>-style resize logic and
+        <code>SlotMachine</code>. It stays one request on purpose — for a demo this size, module
+        splitting would add round-trips without improving cacheability.
+      </p>
+      <p>
+        <strong>The client never computes RNG or payout.</strong> The included
+        <code>DemoOutcomeProvider</code> simply replays a fixed, pre-written script of outcomes;
+        it contains no probability or paytable code. A commented
+        <code>ServerOutcomeProvider</code> shows the production shape:
+        <code>POST /api/spin</code> returns <code>{ stops, win, bigWin, requestId, signature }</code>
+        and the client only animates it. Any real-money deployment also needs server-held balances,
+        signed results (or commit–reveal with a server seed) and rate limiting.
+      </p>
+      <p>
+        Everything runs under a strict <code>Content-Security-Policy</code> with
+        <code>script-src 'self'</code>: no inline scripts, no <code>eval</code>, no third-party
+        origins. Reduced-motion users get shorter phases and a 20-coin burst instead of 210.
+      </p>
+    </section>
+
+    <section id="faq" aria-labelledby="faq-title">
+      <h2 id="faq-title">FAQ</h2>
+      <dl class="faq">
+        <dt>Is this a real-money slot machine?</dt>
+        <dd>No. It is a free animation prototype with virtual credits only; no deposits, wagers or cash payouts.</dd>
+
+        <dt>Does the browser decide wins?</dt>
+        <dd>No. The demo replays a fixed script of outcomes through a replaceable <code>OutcomeProvider</code>. Production must use a server-authoritative endpoint for RNG, payout and signing.</dd>
+
+        <dt>Why was my Canvas blurry on an iPhone Retina screen?</dt>
+        <dd>The backing store was sized in CSS pixels. Size it by <code>devicePixelRatio</code> and call <code>setTransform(dpr,0,0,dpr,0,0)</code>; this demo caps DPR at 2.5 to protect fill rate.</dd>
+
+        <dt>Why does the animation jump after switching tabs?</dt>
+        <dd>Hidden tabs pause <code>requestAnimationFrame</code> but not the clock. Clamp <code>dt</code> to 0.05 s, reset the time base on <code>visibilitychange</code>, and integrate with a fixed 1/120 s step.</dd>
+
+        <dt>Which libraries does it use?</dt>
+        <dd>None — vanilla ES6+, Canvas 2D, Web Audio API and OffscreenCanvas with a fallback. No build step and no runtime network requests after load.</dd>
+
+        <dt>Is it accessible?</dt>
+        <dd>Canvases have text alternatives, controls are native 44 px buttons, status changes announce through <code>aria-live</code>, and <code>prefers-reduced-motion</code> shortens the show.</dd>
+      </dl>
+    </section>
+
+    <section aria-labelledby="cite-title">
+      <h2 id="cite-title">Citation</h2>
+      <p>
+        "3×5 Slot Reel Demo — Canvas Easing, Big Win FX &amp; DPR Fix", Neon Ace,
+        <a href="https://neon-ace.web.app/slots">https://neon-ace.web.app/slots</a>. Last reviewed 2026-11-16.
+        Free, non-wagering Canvas prototype. Return to the
+        <a href="index.html">free blackjack game</a>.
+      </p>
+    </section>
+  </main>
+
+  <canvas id="fx-canvas" aria-hidden="true"></canvas>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>
+        Neon Ace is free entertainment with virtual chips only. No real money is involved.
+        If gambling is affecting your life, support is available at
+        <a href="https://www.begambleaware.org/">BeGambleAware.org</a>.
+      </p>
+      <p><a href="index.html">← Back to the blackjack table</a></p>
+    </div>
+  </footer>
+
+  <script src="assets/slot-machine.js?v=20261116014412" defer></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://neon-ace.web.app/</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://neon-ace.web.app/assets/og-cover.png</image:loc>
+      <image:title>Neon Ace — free blackjack in the browser</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://neon-ace.web.app/slots</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://neon-ace.web.app/assets/og-cover.png</image:loc>
+      <image:title>Neon Ace 3x5 Canvas slot reel demo</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://neon-ace.web.app/baccarat</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://neon-ace.web.app/assets/og-cover.png</image:loc>
+      <image:title>Neon Ace — free browser baccarat (Punto Banco)</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://neon-ace.web.app/sicbo</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://neon-ace.web.app/assets/og-cover.png</image:loc>
+      <image:title>Neon Ace — free browser Sic Bo dice game</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://neon-ace.web.app/roulette</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://neon-ace.web.app/assets/og-cover.png</image:loc>
+      <image:title>Neon Ace — free browser European roulette</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://neon-ace.web.app/videopoker</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://neon-ace.web.app/assets/og-cover.png</image:loc>
+      <image:title>Neon Ace — free browser video poker (Jacks or Better)</image:title>
+    </image:image>
+  </url>
+</urlset>

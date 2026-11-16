@@ -1,0 +1,112 @@
+/* Neon Ace — Baccarat demo page (獨立輕量樣式) */
+:root {
+  --bg: #06110e;
+  --panel: #0d2a21;
+  --panel-2: #102f24;
+  --gold: #e8c879;
+  --gold-bright: #f0c04a;
+  --ink: #f5efe2;
+  --muted: #a9c3b7;
+  --line: rgba(232, 200, 121, 0.28);
+  --player: #4aa3ff;
+  --banker: #e85d75;
+  --tie: #7bd88f;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { width: min(100% - 2rem, 960px); margin-inline: auto; }
+a { color: var(--gold); text-underline-offset: 3px; }
+a:hover { color: var(--gold-bright); }
+:focus-visible { outline: 3px solid var(--gold-bright); outline-offset: 3px; border-radius: 4px; }
+.skip-link { position: absolute; left: -9999px; top: 0; padding: .6rem 1rem; background: var(--gold); color: #06110e; font-weight: 700; z-index: 100; }
+.skip-link:focus { left: .5rem; top: .5rem; }
+
+.site-header { border-bottom: 1px solid var(--line); background: #071713; }
+.header-inner { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; padding-block: .85rem; }
+.brand { display: inline-flex; align-items: center; gap: .55rem; color: var(--ink); text-decoration: none; font-weight: 800; letter-spacing: .02em; }
+.brand-mark { width: 32px; height: 32px; flex: none; }
+.brand-name span { color: var(--gold); }
+.nav { display: flex; gap: 1rem; flex-wrap: wrap; margin-left: auto; }
+.nav a { color: var(--muted); text-decoration: none; font-size: .92rem; }
+.nav a:hover, .nav a[aria-current="page"] { color: var(--gold); }
+
+.hero { padding-block: 2.4rem 1.2rem; }
+.eyebrow { margin: 0 0 .4rem; color: var(--gold); font-size: .78rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+h1 { margin: 0 0 .6rem; font-size: clamp(1.9rem, 5vw, 2.9rem); line-height: 1.15; }
+h2 { margin: 2.2rem 0 .7rem; font-size: clamp(1.25rem, 3vw, 1.6rem); }
+h3 { margin: 1.4rem 0 .4rem; font-size: 1.05rem; color: var(--gold); }
+p { margin: 0 0 .9rem; }
+.lede { color: var(--muted); font-size: 1.05rem; max-width: 70ch; }
+
+.demo-panel { background: linear-gradient(160deg, var(--panel), #071713); border: 1px solid var(--line); border-radius: 18px; padding: 1.1rem; margin-top: 1rem; }
+.canvas-holder { display: flex; justify-content: center; min-height: 180px; }
+#baccarat-canvas { display: block; max-width: 100%; border-radius: 14px; touch-action: manipulation; }
+
+.bet-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; margin-top: 1rem; }
+.bet-area {
+  appearance: none; font: inherit; color: var(--ink); background: var(--panel-2);
+  border: 2px solid var(--line); border-radius: 12px; padding: .7rem .5rem; cursor: pointer;
+  text-align: center; min-height: 72px;
+}
+.bet-area:hover { border-color: var(--gold); }
+.bet-area[aria-disabled="true"] { opacity: .55; cursor: not-allowed; }
+.bet-area .name { display: block; font-weight: 700; font-size: .95rem; }
+.bet-area .odds { display: block; color: var(--muted); font-size: .8rem; }
+.bet-area .amt { display: block; margin-top: .2rem; font-weight: 800; color: var(--gold-bright); font-variant-numeric: tabular-nums; }
+.bet-area.player { border-color: rgba(74,163,255,.45); }
+.bet-area.banker { border-color: rgba(232,93,117,.45); }
+.bet-area.tie { border-color: rgba(123,216,143,.45); }
+
+.chips-row { display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; margin-top: 1rem; }
+.chips-row .hint { margin: 0; }
+.chip-btn {
+  font: inherit; font-weight: 700; width: 44px; height: 44px; border-radius: 50%;
+  border: 2px solid var(--line); background: #0b221c; color: var(--ink); cursor: pointer;
+}
+.chip-btn[aria-pressed="true"] { border-color: var(--gold-bright); box-shadow: 0 0 0 2px rgba(240,192,74,.25) inset; color: var(--gold-bright); }
+
+.controls { display: flex; align-items: center; gap: .65rem; flex-wrap: wrap; margin-top: 1rem; }
+.btn { font: inherit; font-weight: 700; border-radius: 10px; padding: .65rem 1.15rem; cursor: pointer; border: 1px solid transparent; min-height: 44px; }
+.btn-primary { background: var(--gold); color: #06110e; }
+.btn-primary:hover { background: var(--gold-bright); }
+.btn-primary:disabled { opacity: .5; cursor: not-allowed; }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn-ghost:hover { border-color: var(--gold); }
+.btn-ghost:disabled { opacity: .45; cursor: not-allowed; }
+
+.readout { display: flex; gap: 1.2rem; flex-wrap: wrap; margin-top: .9rem; padding-top: .9rem; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+.readout dt { color: var(--muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; }
+.readout dd { margin: 0; font-weight: 700; font-size: 1.05rem; }
+#game-status { flex: 1 1 16rem; margin: 0; color: var(--muted); min-height: 1.6em; }
+.hint { color: var(--muted); font-size: .86rem; margin-top: .8rem; }
+
+.grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: .8rem; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 1.1rem; }
+.card p:last-child { margin-bottom: 0; }
+code { background: #04100c; border: 1px solid var(--line); border-radius: 5px; padding: .1em .35em; font-size: .9em; color: var(--gold); }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; margin: .6rem 0 1rem; font-size: .95rem; }
+th, td { border: 1px solid var(--line); padding: .55rem .6rem; text-align: left; vertical-align: top; }
+th { color: var(--gold); background: rgba(232,200,121,.06); }
+ul, ol { padding-left: 1.3rem; }
+li { margin-bottom: .35rem; }
+.faq dt { font-weight: 700; color: var(--gold); margin-top: 1rem; }
+.faq dd { margin: .25rem 0 0; color: var(--muted); }
+
+.site-footer { border-top: 1px solid var(--line); margin-top: 3rem; padding-block: 1.6rem 2.4rem; color: var(--muted); font-size: .9rem; }
+
+@media (max-width: 560px) {
+  .nav { width: 100%; margin-left: 0; gap: .8rem; }
+  .demo-panel { padding: .7rem; }
+  .bet-board { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
